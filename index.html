@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UMST Human Development Quizzes – Weeks 1–3</title>
+<meta name="description" content="Landing page linking to UMST-branded quizzes for Weeks 1, 2–3, and the combined Weeks 1–3." />
+<style>
+  :root { --maxw: 980px; --brand: #c62828; --accent: #003366; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+         line-height: 1.5; margin: 0; background: #f6f7fb; color: #111; }
+  header { background: #fff; border-bottom: 2px solid #eee; }
+  .brand { max-width: var(--maxw); margin: 0 auto; padding: 18px 16px; text-align:center; }
+  .brand img { width: 110px; height: auto; border: 1px solid #eee; border-radius: 8px; background: #fff; }
+  .brand h1 { margin: 8px 0 4px; font-size: clamp(20px, 3.5vw, 28px); }
+  .brand p { margin: 0; color: #444; }
+  .subtitle { color: #0b8a00; font-weight: 800; margin-top: 6px; }
+  .bar { background: var(--accent); color: #fff; }
+  .bar .inner { max-width: var(--maxw); margin: 0 auto; padding: 12px 16px; text-align:center; }
+  .wrap { max-width: var(--maxw); margin: 24px auto 56px; padding: 0 16px; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card { background: #fff; border: 1px solid #e8e8ef; border-radius: 14px; padding: 18px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 6px 0 12px; color: #555; }
+  .btn { display: inline-block; padding: 10px 14px; border-radius: 10px; text-decoration: none; font-weight: 700;
+          border: 1px solid var(--accent); background: var(--accent); color: #fff; }
+  .btn.secondary { background: #fff; color: var(--accent); }
+  footer { text-align:center; color:#666; font-size: 13px; margin: 40px 0; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <img src="weeks1-3/logo.jpg" alt="UMST Logo" />
+    <h1>University of Medical Sciences &amp; Technology</h1>
+    <p><strong>Faculty of Medicine</strong> — Batch 30 &amp; 28, Abha Center</p>
+    <p class="subtitle">Created by Dr.Salaheldin Terair</p>
+  </div>
+  <div class="bar"><div class="inner"><span data-i18n="bar_title">Human Development Quizzes – Weeks 1 to 3</span> • <button id="langToggle" class="btn secondary" style="margin-left:8px">العربية</button></div></div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+    <div class="card">
+      <h3>Week 1: First Week of Human Development</h3>
+      <p>20 MCQs • Fertilization, cleavage, blastocyst, implantation, clinical correlations.</p>
+      <a class="btn" href="week1/index.html">Open Week 1 Quiz</a>
+    </div>
+    <div class="card">
+      <h3>Weeks 2–3: Implantation to Gastrulation</h3>
+      <p>20 MCQs • Bilaminar disc, cavities, gastrulation, notochord, axes, folding, clinical scenarios.</p>
+      <a class="btn" href="weeks2-3/index.html">Open Weeks 2–3 Quiz</a>
+    </div>
+    <div class="card">
+      <h3>Combined: Weeks 1–3 (40 questions)</h3>
+      <p>All topics in one assessment • Requires answering all before review table unlocks.</p>
+      <a class="btn" href="weeks1-3/index.html">Open Combined Quiz</a>
+    </div>
+    <div class="card">
+      <h3 data-i18n="answers_title">Answer Key (PDF)</h3>
+      <p data-i18n="answers_desc">Correct options with explanations for all 40 questions.</p>
+      <a class="btn" href="answer-key.pdf" data-i18n="answers_btn">Download Answer Key</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © <span id="yr"></span> UMST — Educational use only
+</footer>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const I18N = {
+  ar: {
+    "bar_title": "اختبارات تطور الإنسان – الأسابيع 1 إلى 3",
+    "answers_title": "نموذج الإجابة (PDF)",
+    "answers_desc": "الاختيارات الصحيحة مع الشرح لجميع الأسئلة الأربعين.",
+    "answers_btn": "تحميل نموذج الإجابة",
+  },
+  en: {
+    "bar_title": "Human Development Quizzes – Weeks 1 to 3",
+    "answers_title": "Answer Key (PDF)",
+    "answers_desc": "Correct options with explanations for all 40 questions.",
+    "answers_btn": "Download Answer Key",
+  }
+};
+(function(){
+  const btn = document.getElementById('langToggle');
+  let lang = 'en';
+  function apply(langKey){
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (I18N[langKey] && I18N[langKey][key]) el.textContent = I18N[langKey][key];
+    });
+    btn.textContent = (langKey === 'en') ? 'العربية' : 'English';
+    document.documentElement.dir = (langKey === 'ar') ? 'rtl' : 'ltr';
+    document.body.style.textAlign = (langKey === 'ar') ? 'right' : 'left';
+  }
+  btn.addEventListener('click', () => { lang = (lang === 'en') ? 'ar' : 'en'; apply(lang); });
+  apply(lang);
+})();
+</script>
+</body>
+</html>
